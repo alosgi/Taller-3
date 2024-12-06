@@ -14,4 +14,9 @@ package object Matrices{
         (v1 zip v2).map({case(1,j)=>(i*j)}).sum
     }
 
+    def transpuesta (m: Matriz): Matriz ={
+        val l=m.length
+        Vector.tabulate(l,l)((i,j)=>m(j)(i))
+    }
+
 }
