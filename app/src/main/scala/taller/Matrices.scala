@@ -14,7 +14,7 @@ package object Matrices{
         (v1 zip v2).map({case(1,j)=>(i*j)}).sum
     }
 
-    def transpuesta (m: Matriz): Matriz ={
+    def transpuesta (m: Matriz): Matriz = {
         val l=m.length
         Vector.tabulate(l,l)((i,j)=>m(j)(i))
     }
@@ -23,6 +23,14 @@ package object Matrices{
         val m2t = (transpuesta(m2))
         Vector.tabulate(m1.length, m2.length){
             case (i,j)=> prodPunto(m1(i), m2t(j))}
+    }
+    
+    def subMatriz(m:Matriz, i:Int,j:Int,l:Int): Matriz= {
+        Vector.tabulate(l,l)((a,b)=>(a+i)(b+j))
+    }
+
+    def sumMatriz(m1:Matriz,m2: Matriz): Matriz= {
+        Vector.tabulate(m1.length,m1.length)((a,b)=>m1(a)(b)+m2(a)(b))
     }
 
 }
