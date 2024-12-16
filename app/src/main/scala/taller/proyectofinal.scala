@@ -85,7 +85,31 @@ def ProgramacionRiegoOptimo(f:Finca, d:Distancia): (ProgRiego,Int)={
     costos.mindBy(_._2)
 }
 
+// Paralelizando el calculo de los costos de riego y de movilidad
 
+def costoRiegoFincaPar(f: Finca, pi: ProgRiego): Int ={
+    (0 until f.length).par.map(i => costoRiegoTablon(i,f,pi)).sum
+}
+
+def costoMovilidadPar(f:Finca, pi:ProgRiego, d: Distancia): Int={
+    (0 until pi.length -1).par.map(j => d(pi(j))(pi(j+1))).sum
+}
+
+// paralelizando la generacion de programaciones de riego
+
+def generarProgramacionesRiegoPar(f:Finca): Vector[ProgRiego]={
+    val indices = (0 until f.length).toVector
+    indices.permutations.toVector.par.toVector
+}
+
+// Paralelizando la programacion de riego optima
+
+def ProgramacionRiegoOptimoPar(f:Finca, d:Distancia): (ProgRiego,Int)={
+    val programaciones = generarProgramacionesRiegoPar(f)
+    val costos = programaciones.par.map(pi =>(pi, costoRiegoFincaPar(f,pi)+ costoMovilidadPar(f,pi,d))
+    )
+    costos.mindBy(_._2)
+}
 
 
 
