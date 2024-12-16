@@ -1,4 +1,6 @@
 package taller
+import org.scalameter._
+
 
 type Tablon = (Int,Int,Int) //tiempo de supervivencia, tiempo de riego, prioridad del tablon
 type Finca = Vector[Tablon] // una finca en un vector de tablones
@@ -110,6 +112,14 @@ def ProgramacionRiegoOptimoPar(f:Finca, d:Distancia): (ProgRiego,Int)={
     )
     costos.mindBy(_._2)
 }
+
+
+
+
+
+
+
+
 
 
 
